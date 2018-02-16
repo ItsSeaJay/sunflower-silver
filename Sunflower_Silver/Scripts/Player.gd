@@ -2,10 +2,10 @@ extends Node
 
 const TERMINAL_VELOCITY = Vector2(0, 256)
 
-var speed = 32
+var speed = 64
 var velocity = Vector2(0, 0)
-var acceleration = 0.32
-var drag = 0.32
+var acceleration = 8
+var drag = 0.4
 
 func _ready():
 	pass
@@ -17,13 +17,13 @@ func _process(delta):
 	handle_input()
 	
 	# Clamp their velocity within suitable boundaries
-	velocity.x = clamp(0, TERMINAL_VELOCITY.x)
-	velocity.y = clamp(0, TERMINAL_VELOCITY.y)
+	velocity.x = clamp(velocity.x, 0, TERMINAL_VELOCITY.x)
+	velocity.y = clamp(velocity.y, 0, TERMINAL_VELOCITY.y)
 	pass
 
 func handle_input():
 	if Input.is_action_just_pressed("p1_dig_left"):
-		velocity.y += accelleration
+		velocity.y += acceleration
 	elif Input.is_action_just_pressed("p1_dig_right"):
 		velocity.y += acceleration
 	else:
